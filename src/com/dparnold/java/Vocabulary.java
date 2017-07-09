@@ -1,7 +1,10 @@
 package com.dparnold.java;
 
+import com.dparnold.java.Helper.Time;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -129,4 +132,27 @@ public class Vocabulary {
         }
     }
 
+    public Vocable[] getReviewVocables (int n){
+        List<Integer> urgencyList = new ArrayList<Integer>();
+        for (int i = 0; i<vocabulary.size(); i++) {
+            urgencyList.add(vocabulary.get(i).getUrgency());
+        }
+        if (n>urgencyList.size())n=urgencyList.size();
+        Vocable[] reviewVocables = new Vocable[n];
+        n--;
+        int index;
+        while(n>=0){
+            index =urgencyList.indexOf(Collections.max(urgencyList));
+            reviewVocables[n] = vocabulary.get(index);
+            // In the next loop the highest value has to be ignored
+            // It cannot be deleted because the index information is important
+            // Therefore it is set to the minimum value of the Integer class
+            urgencyList.set(index, Integer.MIN_VALUE);
+            n--;
+        }
+        for (int i = 0; i <reviewVocables.length ; i++) {
+            reviewVocables[i].print();
+        }
+        return reviewVocables;
+    }
 }
