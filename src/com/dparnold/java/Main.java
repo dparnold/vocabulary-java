@@ -1,17 +1,23 @@
 package com.dparnold.java;
 
-/**
- * Created by dominik on 7/6/17.
- */
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args){
         Vocabulary englisch = new Vocabulary("src/com/dparnold/java/vocabulary.txt");
-        englisch.addNew("hallo", "hello");
-        englisch.addNew("Boden", "bottom");
-        englisch.getUrgend().print();
-        englisch.getUrgend().test("huhu");
-        englisch.print();
+
+        for (int i=0;i<13;i++) {
+            //englisch.addNew("Boden", "bottom");
+            //englisch.addNew("hallo", "hello");
+            englisch.getUrgend().test("hello");
+            //englisch.getUrgend().test("bottom");
+            //englisch.getUrgend().test("helllo");
+        }
+        englisch.printUrgency();
+        System.out.println("Get new Vocables:");
+        System.out.println(englisch.getNewVocables().length);
+
         englisch.save();
 
     }
