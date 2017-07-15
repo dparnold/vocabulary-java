@@ -2,25 +2,34 @@ package com.dparnold.java;
 
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        Vocabulary englisch = new Vocabulary("src/com/dparnold/java/vocabulary.txt");
+        Vocabulary spanisch = new Vocabulary("src/com/dparnold/java/vocabulary.txt");
 
-        //for (int i=0;i<13;i++) {
-            //englisch.addNew("Boden", "bottom");
-            //englisch.addNew("hallo", "hello");
-           // englisch.getUrgend().test("hello");
-            //englisch.getUrgend().test("bottom");
-            //englisch.getUrgend().test("helllo");
-        //}
-        englisch.printUrgency();
         System.out.println("Get new Vocables:");
-        System.out.println(englisch.getNewVocables().length);
+        review(3,spanisch);
 
-        englisch.getReviewVocables(3);
+        spanisch.save();
 
-        englisch.save();
-
+    }
+    public static void learnNew(int n, Vocabulary vocabulary){
+        Vocable[] list = vocabulary.getNewVocables(n);
+        for (int i = 0; i <n ; i++) {
+            System.out.println(list[i].getLang0());
+            Scanner scanner = new Scanner(System.in);
+            String lang1 = scanner.nextLine();
+            System.out.println(list[i].test(lang1));
+        }
+    }
+    public static void review(int n, Vocabulary vocabulary){
+        Vocable[] list = vocabulary.getReviewVocables(n);
+        for (int i = 0; i <n ; i++) {
+            System.out.println(list[i].getLang0());
+            Scanner scanner = new Scanner(System.in);
+            String lang1 = scanner.nextLine();
+            System.out.println(list[i].test(lang1));
+        }
     }
 }

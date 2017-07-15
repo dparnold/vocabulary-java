@@ -10,8 +10,8 @@ public class Vocable {
 
     Vocabulary vocabulary;
 
-    public final String lang0;
-    private final String lang1;
+    private String lang0; // your language
+    private String lang1; // the language you study
     private int level;
     private int timesLearned;
     private int timesWrong;
@@ -20,7 +20,8 @@ public class Vocable {
     private int lastStreak;
     private long nextReviewTime;
 
-    public  Vocable (String wholeLine){
+    // Different constructors
+    public Vocable (String wholeLine){
         String[] splitted= wholeLine.split("\t");
         this.lang0 = splitted[0];
         this.lang1 = splitted[1];
@@ -63,6 +64,20 @@ public class Vocable {
         this.streak = streak;
     }
 
+    // Getters and setters
+    public String getLang1() {
+        return lang1;
+    }
+    public String getLang0() {
+        return lang0;
+    }
+    public void setLang0(String lang0) {
+        this.lang0 = lang0;
+    }
+    public void setLang1(String lang1) {
+        this.lang1 = lang1;
+    }
+
     public void print(){
         System.out.println(lang0 +" - " + lang1 +" at level: "+level);
     }
@@ -73,10 +88,12 @@ public class Vocable {
 
     public int getUrgency() {
         // This can be a complex function to determine how urgent this vocable is
+        // No new vocabulary should be considered
+        if(this.timesLearned == 0)return Integer.MIN_VALUE;
         int urgency = (int) (Time.unixTime() - this.nextReviewTime);
         return urgency;
     }
-    public void test(String lang1){
+    public int test(String lang1){
         // This method is essential because this one is used to test whether the user knows this vocable
         // A score value us used. -2 = totaly wrong ; 2 = absolutely correct
         this.timesLearned++;
@@ -104,6 +121,7 @@ public class Vocable {
 
         this.level+=points;
         this.nextReviewTime=calculateNextReviewTime(points);
+        return points;
     }
 
     public void onlyTypo(){

@@ -128,7 +128,6 @@ public class Vocabulary {
     public void printUrgency(){
         for (int i = 0; i <vocabulary.size() ; i++) {
             System.out.println(vocabulary.get(i).getUrgency());
-
         }
     }
 
@@ -150,9 +149,16 @@ public class Vocabulary {
             urgencyList.set(index, Integer.MIN_VALUE);
             n--;
         }
-        for (int i = 0; i <reviewVocables.length ; i++) {
-            reviewVocables[i].print();
-        }
         return reviewVocables;
+    }
+
+    // Auxiliary methods
+    public void swapLanguages(){
+        for (int i = 0; i <vocabulary.size() ; i++) {
+            String buffer = vocabulary.get(i).getLang0();
+            vocabulary.get(i).setLang0(vocabulary.get(i).getLang1());
+            vocabulary.get(i).setLang1(buffer);
+        }
+        this.save();
     }
 }
